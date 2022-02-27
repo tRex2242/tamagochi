@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace tamagochi
 {
+    enum Actions
+    {
+        Eat,
+        Sleep,
+        Game,
+        Clear
+    }
     class Settings
     {
         public static Scale eat;
