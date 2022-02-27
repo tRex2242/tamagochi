@@ -29,13 +29,13 @@ namespace tamagochi
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblGameOver = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblEatCur = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.dinoeat = new System.Windows.Forms.Button();
             this.hap = new System.Windows.Forms.Button();
             this.slp = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.live = new System.Windows.Forms.PictureBox();
             this.sleep = new System.Windows.Forms.PictureBox();
             this.hapy = new System.Windows.Forms.PictureBox();
@@ -51,6 +51,8 @@ namespace tamagochi
             this.lblClearCur = new System.Windows.Forms.Label();
             this.lblHPMax = new System.Windows.Forms.Label();
             this.lblHPCur = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.game_timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.live)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sleep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hapy)).BeginInit();
@@ -62,12 +64,12 @@ namespace tamagochi
             // lblGameOver
             // 
             this.lblGameOver.AutoSize = true;
-            this.lblGameOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblGameOver.Location = new System.Drawing.Point(59, 671);
+            this.lblGameOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblGameOver.Location = new System.Drawing.Point(384, 348);
             this.lblGameOver.Name = "lblGameOver";
-            this.lblGameOver.Size = new System.Drawing.Size(326, 24);
+            this.lblGameOver.Size = new System.Drawing.Size(445, 31);
             this.lblGameOver.TabIndex = 24;
-            this.lblGameOver.Text = "О нет, Гоша умер! Это ужастно!";
+            this.lblGameOver.Text = "О нет, Даня умер! Это ужастно!";
             // 
             // label1
             // 
@@ -75,38 +77,40 @@ namespace tamagochi
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(360, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 25);
+            this.label1.Size = new System.Drawing.Size(328, 25);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Это Гоша, помоги ему!";
+            this.label1.Text = "Это Даня, позаботься о нём!";
             // 
             // lblEatCur
             // 
             this.lblEatCur.AutoSize = true;
-            this.lblEatCur.Location = new System.Drawing.Point(171, 95);
+            this.lblEatCur.Location = new System.Drawing.Point(139, 95);
             this.lblEatCur.Name = "lblEatCur";
             this.lblEatCur.Size = new System.Drawing.Size(35, 13);
             this.lblEatCur.TabIndex = 27;
             this.lblEatCur.Text = "label2";
             // 
-            // button4
+            // dinoeat
             // 
-            this.button4.BackgroundImage = global::tamagochi.Properties.Resources.d_eat;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Location = new System.Drawing.Point(495, 468);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(193, 212);
-            this.button4.TabIndex = 23;
-            this.button4.UseVisualStyleBackColor = true;
+            this.dinoeat.BackgroundImage = global::tamagochi.Properties.Resources.d_eat;
+            this.dinoeat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.dinoeat.Location = new System.Drawing.Point(532, 462);
+            this.dinoeat.Name = "dinoeat";
+            this.dinoeat.Size = new System.Drawing.Size(205, 206);
+            this.dinoeat.TabIndex = 23;
+            this.dinoeat.UseVisualStyleBackColor = true;
+            this.dinoeat.Click += new System.EventHandler(this.button4_Click);
             // 
             // hap
             // 
             this.hap.BackgroundImage = global::tamagochi.Properties.Resources.d_play;
             this.hap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.hap.Location = new System.Drawing.Point(835, 470);
+            this.hap.Location = new System.Drawing.Point(835, 456);
             this.hap.Name = "hap";
             this.hap.Size = new System.Drawing.Size(202, 212);
             this.hap.TabIndex = 22;
             this.hap.UseVisualStyleBackColor = true;
+            this.hap.Click += new System.EventHandler(this.hap_Click);
             // 
             // slp
             // 
@@ -117,16 +121,7 @@ namespace tamagochi
             this.slp.Size = new System.Drawing.Size(202, 206);
             this.slp.TabIndex = 21;
             this.slp.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::tamagochi.Properties.Resources.d_clear;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(488, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 206);
-            this.button1.TabIndex = 20;
-            this.button1.UseVisualStyleBackColor = true;
+            this.slp.Click += new System.EventHandler(this.slp_Click);
             // 
             // live
             // 
@@ -176,7 +171,7 @@ namespace tamagochi
             // 
             this.eat.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.eat.Image = global::tamagochi.Properties.Resources.eat;
-            this.eat.Location = new System.Drawing.Point(63, 95);
+            this.eat.Location = new System.Drawing.Point(44, 95);
             this.eat.Name = "eat";
             this.eat.Size = new System.Drawing.Size(89, 86);
             this.eat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -189,7 +184,7 @@ namespace tamagochi
             this.dino.Image = global::tamagochi.Properties.Resources.dino;
             this.dino.Location = new System.Drawing.Point(44, 229);
             this.dino.Name = "dino";
-            this.dino.Size = new System.Drawing.Size(385, 439);
+            this.dino.Size = new System.Drawing.Size(385, 380);
             this.dino.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.dino.TabIndex = 0;
             this.dino.TabStop = false;
@@ -197,7 +192,7 @@ namespace tamagochi
             // lblEatMax
             // 
             this.lblEatMax.AutoSize = true;
-            this.lblEatMax.Location = new System.Drawing.Point(171, 161);
+            this.lblEatMax.Location = new System.Drawing.Point(139, 168);
             this.lblEatMax.Name = "lblEatMax";
             this.lblEatMax.Size = new System.Drawing.Size(35, 13);
             this.lblEatMax.TabIndex = 28;
@@ -206,7 +201,7 @@ namespace tamagochi
             // lblSleepCur
             // 
             this.lblSleepCur.AutoSize = true;
-            this.lblSleepCur.Location = new System.Drawing.Point(350, 95);
+            this.lblSleepCur.Location = new System.Drawing.Point(342, 95);
             this.lblSleepCur.Name = "lblSleepCur";
             this.lblSleepCur.Size = new System.Drawing.Size(35, 13);
             this.lblSleepCur.TabIndex = 29;
@@ -215,7 +210,7 @@ namespace tamagochi
             // lblSleepMax
             // 
             this.lblSleepMax.AutoSize = true;
-            this.lblSleepMax.Location = new System.Drawing.Point(350, 168);
+            this.lblSleepMax.Location = new System.Drawing.Point(342, 168);
             this.lblSleepMax.Name = "lblSleepMax";
             this.lblSleepMax.Size = new System.Drawing.Size(35, 13);
             this.lblSleepMax.TabIndex = 30;
@@ -260,7 +255,7 @@ namespace tamagochi
             // lblHPMax
             // 
             this.lblHPMax.AutoSize = true;
-            this.lblHPMax.Location = new System.Drawing.Point(965, 145);
+            this.lblHPMax.Location = new System.Drawing.Point(965, 168);
             this.lblHPMax.Name = "lblHPMax";
             this.lblHPMax.Size = new System.Drawing.Size(35, 13);
             this.lblHPMax.TabIndex = 35;
@@ -275,11 +270,28 @@ namespace tamagochi
             this.lblHPCur.TabIndex = 36;
             this.lblHPCur.Text = "label2";
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::tamagochi.Properties.Resources.d_clear;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Location = new System.Drawing.Point(532, 229);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(205, 206);
+            this.button1.TabIndex = 38;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // game_timer
+            // 
+            this.game_timer.Tick += new System.EventHandler(this.game_timer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1076, 705);
+            this.Controls.Add(this.lblGameOver);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblHPCur);
             this.Controls.Add(this.lblHPMax);
             this.Controls.Add(this.lblClearCur);
@@ -291,11 +303,9 @@ namespace tamagochi
             this.Controls.Add(this.lblEatMax);
             this.Controls.Add(this.lblEatCur);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblGameOver);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.dinoeat);
             this.Controls.Add(this.hap);
             this.Controls.Add(this.slp);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.live);
             this.Controls.Add(this.sleep);
             this.Controls.Add(this.hapy);
@@ -323,10 +333,10 @@ namespace tamagochi
         private System.Windows.Forms.PictureBox hapy;
         private System.Windows.Forms.PictureBox sleep;
         private System.Windows.Forms.PictureBox live;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btEat_click;
         private System.Windows.Forms.Button slp;
         private System.Windows.Forms.Button hap;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button dinoeat;
         private System.Windows.Forms.Label lblGameOver;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblEatCur;
@@ -339,6 +349,8 @@ namespace tamagochi
         private System.Windows.Forms.Label lblClearCur;
         private System.Windows.Forms.Label lblHPMax;
         private System.Windows.Forms.Label lblHPCur;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer game_timer;
     }
 }
 

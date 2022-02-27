@@ -29,7 +29,7 @@ namespace tamagochi
             this.max_value = max_value;
         }
 
-        Scale add_value(int add_value)
+        public Scale add_value(int add_value)
         {
              current_value += add_value;
             if ( current_value >  max_value)
@@ -39,7 +39,7 @@ namespace tamagochi
             return this;
         }
 
-        Scale dif_value(int dif_value)
+        public Scale dif_value(int dif_value)
         {
             current_value -= dif_value;
             if (current_value < 0)
@@ -48,5 +48,7 @@ namespace tamagochi
             }
             return this;
         }
+
+        
     }
 }
