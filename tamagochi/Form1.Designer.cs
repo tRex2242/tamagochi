@@ -61,6 +61,7 @@ namespace tamagochi
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.btmAction = new System.Windows.Forms.Button();
+            this.queue_timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.live)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sleep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hapy)).BeginInit();
@@ -303,7 +304,7 @@ namespace tamagochi
             // 
             this.Очередь.AutoSize = true;
             this.Очередь.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Очередь.Location = new System.Drawing.Point(1074, 61);
+            this.Очередь.Location = new System.Drawing.Point(1057, 67);
             this.Очередь.Name = "Очередь";
             this.Очередь.Size = new System.Drawing.Size(65, 16);
             this.Очередь.TabIndex = 39;
@@ -311,61 +312,72 @@ namespace tamagochi
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(1077, 95);
+            this.pictureBox1.Location = new System.Drawing.Point(1057, 95);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 41;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(1077, 410);
+            this.pictureBox2.Location = new System.Drawing.Point(1057, 162);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 42;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(1077, 333);
+            this.pictureBox3.Location = new System.Drawing.Point(1057, 229);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(66, 61);
+            this.pictureBox3.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 43;
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(1077, 249);
+            this.pictureBox4.Location = new System.Drawing.Point(1057, 296);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 44;
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(1076, 168);
+            this.pictureBox5.Location = new System.Drawing.Point(1057, 363);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 45;
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(1078, 497);
+            this.pictureBox6.Location = new System.Drawing.Point(1058, 430);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(65, 61);
+            this.pictureBox6.Size = new System.Drawing.Size(64, 61);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 46;
             this.pictureBox6.TabStop = false;
             // 
             // btmAction
             // 
             this.btmAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btmAction.Location = new System.Drawing.Point(1037, 575);
+            this.btmAction.Location = new System.Drawing.Point(1019, 503);
             this.btmAction.Name = "btmAction";
-            this.btmAction.Size = new System.Drawing.Size(130, 82);
+            this.btmAction.Size = new System.Drawing.Size(148, 154);
             this.btmAction.TabIndex = 49;
             this.btmAction.Text = "DO IT!!!";
             this.btmAction.UseVisualStyleBackColor = true;
+            this.btmAction.Click += new System.EventHandler(this.btmAction_Click);
+            // 
+            // queue_timer
+            // 
+            this.queue_timer.Tick += new System.EventHandler(this.queue_timer_Tick);
             // 
             // Form1
             // 
@@ -454,6 +466,7 @@ namespace tamagochi
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Button btmAction;
+        private System.Windows.Forms.Timer queue_timer;
     }
 }
 

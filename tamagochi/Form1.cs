@@ -12,14 +12,30 @@ namespace tamagochi
 {
     public partial class Form1 : Form
     {
+        PictureBox[] queue;
+
+
         public Form1()
         {
             InitializeComponent();
 
             new Settings();
 
+            queue = new PictureBox[]
+            {
+                pictureBox1,
+                pictureBox2,
+                pictureBox3,
+                pictureBox4,
+                pictureBox5,
+                pictureBox6
+            };
+
             game_timer.Interval = 1000 / Settings.speed;
             game_timer.Start();
+
+            queue_timer.Interval = 1000 / Settings.queueSpeed;
+            queue_timer.Start();
 
             init_game();
         }
@@ -79,9 +95,20 @@ namespace tamagochi
             slp.Enabled = false;
             dinoeat.Enabled = false;
             hap.Enabled = false;
+            button1.Enabled = false;
+            btmAction.Enabled = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
+        {
+            //eating();
+            Settings.queue.Enqueue(
+                new KeyValuePair<Actions, Image>(
+                    Actions.Eat,
+                    Properties.Resources.d_eat));
+        }
+
+        private void eating()
         {
             Settings.eat = Settings.eat.add_value(Settings.add);
             Settings.clear = Settings.clear.dif_value(Settings.sub);
@@ -91,6 +118,15 @@ namespace tamagochi
 
         private void slp_Click(object sender, EventArgs e)
         {
+            //sleeping();
+            Settings.queue.Enqueue(
+                new KeyValuePair<Actions, Image>(
+                    Actions.Eat,
+                    Properties.Resources.d_sleep));
+        }
+
+        private void sleeping()
+        {
             Settings.sleep = Settings.sleep.add_value(Settings.add);
             Settings.eat = Settings.eat.dif_value(Settings.sub);
             set_scales();
@@ -99,6 +135,15 @@ namespace tamagochi
 
         private void hap_Click(object sender, EventArgs e)
         {
+            //playing();
+            Settings.queue.Enqueue(
+                new KeyValuePair<Actions, Image>(
+                    Actions.Eat,
+                    Properties.Resources.d_play));
+        }
+
+        private void playing()
+        {
             Settings.happy = Settings.happy.add_value(Settings.add);
             Settings.sleep = Settings.sleep.dif_value(Settings.sub);
             set_scales();
@@ -106,6 +151,15 @@ namespace tamagochi
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            //clearing();
+            Settings.queue.Enqueue(
+                new KeyValuePair<Actions, Image>(
+                    Actions.Clear,
+                    Properties.Resources.d_clear));
+        }
+
+        private void clearing()
         {
             Settings.clear = Settings.clear.add_value(Settings.add);
             Settings.happy = Settings.happy.dif_value(Settings.sub);
@@ -165,6 +219,49 @@ namespace tamagochi
                 {
                     generate_action(random);
                 }
+            }
+        }
+
+        private void queue_timer_Tick(object sender, EventArgs e)
+        {
+            var elements = Settings.queue.Elements;
+            for(int i = 0; i < elements.Length; i++)
+            {
+                if(elements[i] != null)
+                {
+                    var element = elements[i];
+                    var checked_element = (KeyValuePair<Actions, Image>)element;
+                    queue[i].Image = checked_element.Value;
+                }
+                else
+                {
+                    queue[i].Image = null;
+                }
+            }
+        }
+
+        private void btmAction_Click(object sender, EventArgs e)
+        {
+            var element = Settings.queue.Dequeue();
+            if(element == null)
+            {
+                return;
+            }
+            var checked_element = (KeyValuePair<Actions, Image>)element;
+            switch (checked_element.Key)
+            {
+                case Actions.Eat:
+                    eating();
+                    break;
+                case Actions.Sleep:
+                    sleeping();
+                    break;
+                case Actions.Game:
+                    playing();
+                    break;
+                case Actions.Clear:
+                    clearing();
+                    break;
             }
         }
     }  
