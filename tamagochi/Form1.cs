@@ -13,7 +13,7 @@ namespace tamagochi
     public partial class Form1 : Form
     {
         PictureBox[] queue;
-
+        PictureBox[] stack;
 
         public Form1()
         {
@@ -29,6 +29,16 @@ namespace tamagochi
                 pictureBox4,
                 pictureBox5,
                 pictureBox6
+            };
+
+            stack = new PictureBox[]
+            {
+                pBStack1,
+                pBStack2,
+                pBStack3,
+                pBStack4,
+                pBStack5,
+                pBStack6
             };
 
             game_timer.Interval = 1000 / Settings.speed;
@@ -102,10 +112,20 @@ namespace tamagochi
         private void button4_Click(object sender, EventArgs e)
         {
             //eating();
-            Settings.queue.Enqueue(
-                new KeyValuePair<Actions, Image>(
+            var pair = new KeyValuePair<Actions, Image>(
                     Actions.Eat,
-                    Properties.Resources.d_eat));
+                    Properties.Resources.d_eat);
+            
+            Random random = new Random();
+            int coin = random.Next();
+            if (coin == 0)
+            {
+                Settings.queue.Enqueue(pair);
+            }
+            else 
+            {
+                Settings.stack.Push(pair);
+            }
         }
 
         private void eating()
@@ -119,10 +139,20 @@ namespace tamagochi
         private void slp_Click(object sender, EventArgs e)
         {
             //sleeping();
-            Settings.queue.Enqueue(
-                new KeyValuePair<Actions, Image>(
-                    Actions.Eat,
-                    Properties.Resources.d_sleep));
+            var pair = new KeyValuePair<Actions, Image>(
+                    Actions.Sleep,
+                    Properties.Resources.d_eat);
+
+            Random random = new Random();
+            int coin = random.Next();
+            if (coin == 0)
+            {
+                Settings.queue.Enqueue(pair);
+            }
+            else
+            {
+                Settings.stack.Push(pair);
+            }
         }
 
         private void sleeping()
@@ -136,10 +166,20 @@ namespace tamagochi
         private void hap_Click(object sender, EventArgs e)
         {
             //playing();
-            Settings.queue.Enqueue(
-                new KeyValuePair<Actions, Image>(
-                    Actions.Eat,
-                    Properties.Resources.d_play));
+            var pair = new KeyValuePair<Actions, Image>(
+                    Actions.Game,
+                    Properties.Resources.d_eat);
+
+            Random random = new Random();
+            int coin = random.Next();
+            if (coin == 0)
+            {
+                Settings.queue.Enqueue(pair);
+            }
+            else
+            {
+                Settings.stack.Push(pair);
+            }
         }
 
         private void playing()
@@ -153,10 +193,20 @@ namespace tamagochi
         private void button1_Click(object sender, EventArgs e)
         {
             //clearing();
-            Settings.queue.Enqueue(
-                new KeyValuePair<Actions, Image>(
+            var pair = new KeyValuePair<Actions, Image>(
                     Actions.Clear,
-                    Properties.Resources.d_clear));
+                    Properties.Resources.d_eat);
+
+            Random random = new Random();
+            int coin = random.Next();
+            if (coin == 0)
+            {
+                Settings.queue.Enqueue(pair);
+            }
+            else
+            {
+                Settings.stack.Push(pair);
+            }
         }
 
         private void clearing()
@@ -224,10 +274,34 @@ namespace tamagochi
 
         private void queue_timer_Tick(object sender, EventArgs e)
         {
-            var elements = Settings.queue.Elements;
-            for(int i = 0; i < elements.Length; i++)
+            show_queue();
+            show_stack();
+        }
+
+        void show_stack()
+        {
+            var elements = Settings.stack.Elements;
+            for (int i = 0; i < elements.Length; i++)
             {
-                if(elements[i] != null)
+                if (elements[i] != null)
+                {
+                    var element = elements[i];
+                    var checked_element = (KeyValuePair<Actions, Image>)element;
+                    stack[i].Image = checked_element.Value;
+                }
+                else
+                {
+                    stack[i].Image = null;
+                }
+            }
+        }
+
+        private void show_queue()
+        {
+            var elements = Settings.queue.Elements;
+            for (int i = 0; i < elements.Length; i++)
+            {
+                if (elements[i] != null)
                 {
                     var element = elements[i];
                     var checked_element = (KeyValuePair<Actions, Image>)element;

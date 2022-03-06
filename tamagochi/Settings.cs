@@ -30,6 +30,8 @@ namespace tamagochi
         public static MyQueue queue;
         public static int queueSpeed;
 
+        public static MyStack stack;
+
         public Settings()
         {
             eat = new Scale(100, 100);
@@ -46,6 +48,8 @@ namespace tamagochi
 
             queue = new MyQueue(6);
             queueSpeed = 15;
+
+            stack = new MyStack(6);
         }
     }
 }
